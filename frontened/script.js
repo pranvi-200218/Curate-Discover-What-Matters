@@ -1,3 +1,4 @@
+const YT_KEY = 'AIzaSyAwiL0rEq2qvpJEzNgv2rp6kD4-C-uQJac';
 let allItems = [];
 let bookmarks = JSON.parse(localStorage.getItem('bookmarks') || '[]');
 let activeFilter = 'all';
@@ -24,7 +25,8 @@ async function search() {
 
 async function fetchYouTube(q) {
     try {
-        const res = await fetch(`http://localhost:3000/youtube?q=${encodeURIComponent(q)}`);
+        const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${q}&type=video&maxResults=10&key=${YT_KEY}`;
+        const res = await fetch(url);
         const data = await res.json();
 
         if (data.error) {
